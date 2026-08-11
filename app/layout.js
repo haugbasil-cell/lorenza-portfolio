@@ -14,6 +14,10 @@ export const metadata = {
   description: "Portfolio von Lorenza Longhi",
 };
 
+export const viewport = {
+  themeColor: "#3C3C3C",
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="de" className={myFont.variable}>
