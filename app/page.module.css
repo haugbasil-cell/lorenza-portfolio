@@ -52,7 +52,7 @@
 }
 
 .textBlock a:hover {
-  text-decoration: underline;
+  font-style: italic;
 }
 
 .highlighted {
