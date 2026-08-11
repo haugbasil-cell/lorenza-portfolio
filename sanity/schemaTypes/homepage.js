@@ -12,12 +12,13 @@ export default defineType({
       initialValue: 'Startseite',
     }),
     defineField({
-      name: 'mainImage',
-      title: 'Bild (oben links)',
-      type: 'image',
-      options: { hotspot: true },
-      description: 'Das Bild, das oben links auf der Seite erscheint.',
-    }),
+  name: 'images',
+  title: 'Bilder (oben links, zufällige Auswahl)',
+  type: 'array',
+  of: [{ type: 'image', options: { hotspot: true } }],
+  description:
+    'Lade hier mehrere Bilder hoch. Bei jedem Laden der Seite wird zufällig eines davon angezeigt.',
+}),
     defineField({
       name: 'backgroundColor',
       title: 'Hintergrundfarbe',

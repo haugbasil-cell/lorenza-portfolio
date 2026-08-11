@@ -8,7 +8,7 @@ export const homepageQuery = groq`
     email,
     instagram,
     copyrightYear,
-    mainImage,
+  images,
     "backgroundColor": backgroundColor.hex,
     years[]{
       label,
