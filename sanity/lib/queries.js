@@ -9,8 +9,9 @@ export const homepageQuery = groq`
     instagram,
     copyrightYear,
 images[]{
-  ...,
-  "dimensions": asset->metadata.dimensions
+  fullBleed,
+  "image": image,
+  "dimensions": image.asset->metadata.dimensions
 },
     "backgroundColor": backgroundColor.hex,
     years[]{

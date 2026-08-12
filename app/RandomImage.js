@@ -31,15 +31,17 @@ export default function RandomImage({ images, alt }) {
 
  const width = selected.dimensions?.width || 800;
   const height = selected.dimensions?.height || 1200;
+  const wrapClass = selected.fullBleed ? styles.imageWrapFullBleed : styles.imageWrap;
+  const imgClass = selected.fullBleed ? styles.imageFullBleed : styles.image;
 
   return (
-    <div className={styles.imageWrap}>
+    <div className={wrapClass}>
       <Image
-        src={urlFor(selected).width(600).quality(90).url()}
+        src={urlFor(selected.image).width(600).quality(90).url()}
         alt={alt}
         width={width}
         height={height}
-        className={styles.image}
+        className={imgClass}
         priority
       />
     </div>

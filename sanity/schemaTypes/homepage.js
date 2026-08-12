@@ -11,11 +11,34 @@ export default defineType({
       type: 'string',
       initialValue: 'Startseite',
     }),
-    defineField({
+   defineField({
   name: 'images',
   title: 'Bilder (oben links, zufällige Auswahl)',
   type: 'array',
-  of: [{ type: 'image', options: { hotspot: true } }],
+  of: [
+    {
+      type: 'object',
+      name: 'galleryImage',
+      title: 'Bild',
+      fields: [
+        defineField({
+          name: 'image',
+          title: 'Bilddatei',
+          type: 'image',
+          options: { hotspot: true },
+        }),
+        defineField({
+          name: 'fullBleed',
+          title: 'Randlos (Fullbleed)',
+          type: 'boolean',
+          description:
+            'An: Bild füllt die linke Spalte randlos von oben bis unten. Aus: Bild erscheint klein, mit Abstand zum Rand.',
+          initialValue: false,
+        }),
+      ],
+      preview: { select: { media: 'image', fullBleed: 'fullBleed' } },
+    },
+  ],
   description:
     'Lade hier mehrere Bilder hoch. Bei jedem Laden der Seite wird zufällig eines davon angezeigt.',
 }),
