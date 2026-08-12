@@ -10,7 +10,7 @@
   position: absolute;
   top: 30px;
   left: 30px;
-  max-width: 220px;
+  max-width: 320px;
   max-height: 70dvh;
 }
 
@@ -24,13 +24,14 @@
 
 .imageWrapFullBleed {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .imageFullBleed {
-  width: 100%;
+  width: auto;
   height: 100%;
-  object-fit: cover;
   display: block;
 }
 
