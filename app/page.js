@@ -29,22 +29,23 @@ export default async function Home() {
 
       <div className={styles.textBlock}>
         <p>{name}</p>
-        <p>
-          Portfolio:&nbsp;All,{' '}
-          {years.map((y, i) => (
-<span key={i}>
-    <a
-    href={y.pdfUrl || '#'}
-    target="_blank"
-    rel="noopener noreferrer"
-    className={y.highlighted ? styles.highlighted : undefined}
-  >
-    {y.label}
-  </a>
-  {i < years.length - 1 ? ', ' : ''}
-</span>
-          ))}
-        </p>
+       <p>
+  Portfolio:{' '}
+  {years.map((y, i) => (
+    <span key={i}>
+      
+        <a
+        href={y.pdfUrl || '#'}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={y.highlighted ? styles.highlighted : undefined}
+      >
+        {y.label}
+      </a>
+      {i < years.length - 1 ? ', ' : ''}
+    </span>
+  ))}
+</p>
         <p>
           Email:{' '}
           <a href={`mailto:${email}`}>{email}</a>
@@ -59,7 +60,7 @@ export default async function Home() {
             {instagram}
           </a>
         </p>
-        <p>Copyright © {copyrightYear} {name}</p>
+        <p>{name} © {copyrightYear} All Rights Reserved</p>
       </div>
     </main>
   )
