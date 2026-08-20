@@ -13,6 +13,10 @@ images[]{
   "image": image,
   "dimensions": image.asset->metadata.dimensions
 },
+duotoneImages[]{
+  "image": image,
+  "color": color.hex
+},
     "backgroundColor": backgroundColor.hex,
     years[]{
       label,

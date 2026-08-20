@@ -42,6 +42,35 @@ export default defineType({
   description:
     'Lade hier mehrere Bilder hoch. Bei jedem Laden der Seite wird zufällig eines davon angezeigt.',
 }),
+defineField({
+  name: 'duotoneImages',
+  title: 'Zweifarben-Bildergalerie (zentriert, wechselt automatisch)',
+  type: 'array',
+  of: [
+    {
+      type: 'object',
+      name: 'duotoneImage',
+      title: 'Bild',
+      fields: [
+        defineField({
+          name: 'image',
+          title: 'Bilddatei',
+          type: 'image',
+          options: { hotspot: true },
+        }),
+        defineField({
+          name: 'color',
+          title: 'Akzentfarbe',
+          type: 'color',
+          description: 'Diese Farbe ersetzt die dunklen Bereiche des Bilds im Zweifarben-Effekt.',
+        }),
+      ],
+      preview: { select: { media: 'image' } },
+    },
+  ],
+  description:
+    'Bilder für die zentrierte Galerie über dem Textblock. Jedes Bild wird automatisch in ein Zweifarben-Muster umgewandelt und wechselt alle paar Sekunden.',
+}),
     defineField({
       name: 'backgroundColor',
       title: 'Hintergrundfarbe',

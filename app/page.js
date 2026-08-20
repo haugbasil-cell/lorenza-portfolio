@@ -1,6 +1,7 @@
 import { client } from '@/sanity/lib/client'
 import { homepageQuery } from '@/sanity/lib/queries'
 import RandomImage from './RandomImage'
+import DuotoneGallery from './DuotoneGallery'
 import styles from './page.module.css'
 
 export const revalidate = 30
@@ -19,6 +20,7 @@ export default async function Home() {
     instagram = '',
     copyrightYear = new Date().getFullYear().toString(),
     images = [],
+    duotoneImages = [],
     backgroundColor = '#3D0F35',
     years = [],
   } = data || {}
@@ -26,6 +28,7 @@ export default async function Home() {
   return (
     <main className={styles.page} style={{ backgroundColor }}>
       <RandomImage images={images} alt={name} />
+      <DuotoneGallery images={duotoneImages} alt={name} />
 
       <div className={styles.textBlock}>
         <p>{name}</p>
