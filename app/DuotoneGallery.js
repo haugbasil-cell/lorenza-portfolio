@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
-const REVEAL_DURATION = 2500; // ms - wie lange der Auf-/Abbau pro Bild dauert
+const REVEAL_DURATION = 5500; // ms - wie lange der Auf-/Abbau pro Bild dauert
 const HOLD_DURATION = 2500; // ms - wie lange das fertige Bild stehen bleibt
 const THRESHOLD_TARGET = 200; // "voller Wert" (wie Photoshops Schwellenwert-Regler)
 
