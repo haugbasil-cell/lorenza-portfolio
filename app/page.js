@@ -20,15 +20,17 @@ export default async function Home() {
     instagram = '',
     copyrightYear = new Date().getFullYear().toString(),
     images = [],
+    showMainImage = true,
     duotoneImages = [],
+    showDuotoneGallery = true,
     backgroundColor = '#3D0F35',
     years = [],
   } = data || {}
 
   return (
     <main className={styles.page} style={{ backgroundColor }}>
-      <RandomImage images={images} alt={name} />
-      <DuotoneGallery images={duotoneImages} alt={name} />
+     {showMainImage && <RandomImage images={images} alt={name} />}
+{showDuotoneGallery && <DuotoneGallery images={duotoneImages} alt={name} />}
 
       <div className={styles.textBlock}>
         <p>{name}</p>

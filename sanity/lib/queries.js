@@ -8,11 +8,13 @@ export const homepageQuery = groq`
     email,
     instagram,
     copyrightYear,
+showMainImage,
 images[]{
   fullBleed,
   "image": image,
   "dimensions": image.asset->metadata.dimensions
 },
+showDuotoneGallery,
 duotoneImages[]{
   "image": image,
   "color": color.hex
