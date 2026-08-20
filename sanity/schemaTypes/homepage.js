@@ -10,7 +10,13 @@ export default defineType({
       title: 'Interner Titel (nur zur Orientierung im Studio)',
       type: 'string',
       initialValue: 'Startseite',
-    }),
+    }),  
+  defineField({
+  name: 'showMainImage',
+  title: 'Bildergalerie oben links anzeigen',
+  type: 'boolean',
+  initialValue: true,
+}),
    defineField({
   name: 'images',
   title: 'Bilder (oben links, zufällige Auswahl)',
@@ -41,6 +47,12 @@ export default defineType({
   ],
   description:
     'Lade hier mehrere Bilder hoch. Bei jedem Laden der Seite wird zufällig eines davon angezeigt.',
+}),
+defineField({
+  name: 'showDuotoneGallery',
+  title: 'Zweifarben-Galerie anzeigen',
+  type: 'boolean',
+  initialValue: true,
 }),
 defineField({
   name: 'duotoneImages',
