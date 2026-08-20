@@ -4,10 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
-const REVEAL_DURATION = 1500; // ms - wie lange der Auf-/Abbau pro Bild dauert
+const REVEAL_DURATION = 2500; // ms - wie lange der Auf-/Abbau pro Bild dauert
 const HOLD_DURATION = 2500; // ms - wie lange das fertige Bild stehen bleibt
-const THRESHOLD_TARGET = 128; // "voller Wert" (wie Photoshops Schwellenwert-Regler)
+const THRESHOLD_TARGET = 200; // "voller Wert" (wie Photoshops Schwellenwert-Regler)
 
+function easeInOutQuad(t) {
+  return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+}
 // Lädt ein Bild und berechnet einmalig die Graustufen-Werte pro Pixel.
 function loadGrayscale(url) {
   return new Promise((resolve, reject) => {
@@ -105,9 +108,10 @@ export default function DuotoneGallery({ images, alt }) {
       function step(now) {
         if (cancelled) return;
         const progress = Math.min(1, (now - start) / REVEAL_DURATION);
-        const thresholdValue = buildUp
-          ? progress * THRESHOLD_TARGET
-          : THRESHOLD_TARGET * (1 - progress);
+        const eased = easeInOutQuad(progress);
+    const thresholdValue = buildUp
+      ? eased * THRESHOLD_TARGET
+      : THRESHOLD_TARGET * (1 - eased);
         render(item, thresholdValue);
         if (progress < 1) {
           raf = requestAnimationFrame(step);
