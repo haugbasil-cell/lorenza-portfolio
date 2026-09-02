@@ -4,10 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
-const REVEAL_DURATION = 3000; // ms - wie lange der Auf-/Abbau pro Bild dauert
-const HOLD_DURATION_FULL = 1000; // ms - wie lange die volle Farbfläche stehen bleibt (kürzer)
-const HOLD_DURATION_EMPTY = 3000; // ms - wie lange der leere Zustand (Bild komplett weg) stehen bleibt (länger)
-const THRESHOLD_TARGET = 250; // "voller Wert" (wie Photoshops Schwellenwert-Regler)
+const REVEAL_DURATION = 1500; // ms - wie lange der Auf-/Abbau pro Bild dauert
+const HOLD_DURATION_FULL = 1200; // ms - wie lange die volle Farbfläche stehen bleibt (kürzer)
+const HOLD_DURATION_EMPTY = 3500; // ms - wie lange der leere Zustand (Bild komplett weg) stehen bleibt (länger)
+const THRESHOLD_TARGET = 128; // "voller Wert" (wie Photoshops Schwellenwert-Regler)
+const SOURCE_WIDTH = 1600; // Auflösung für Sanity-Abruf UND Graustufen-Berechnung (höher = feineres Raster)
 
 // Lädt ein Bild und berechnet einmalig die Graustufen-Werte pro Pixel.
 function loadGrayscale(url) {
@@ -15,7 +16,7 @@ function loadGrayscale(url) {
     const img = new window.Image();
     img.crossOrigin = "anonymous";
     img.onload = () => {
-      const maxWidth = 900;
+      const maxWidth = SOURCE_WIDTH;
       const scale = Math.min(1, maxWidth / img.naturalWidth);
       const w = Math.max(1, Math.round(img.naturalWidth * scale));
       const h = Math.max(1, Math.round(img.naturalHeight * scale));
@@ -51,7 +52,7 @@ export default function DuotoneGallery({ images, alt }) {
         images.map(async (item) => {
           try {
             const { gray, w, h } = await loadGrayscale(
-              urlFor(item.image).width(900).quality(85).url()
+              urlFor(item.image).width(SOURCE_WIDTH).quality(85).url()
             );
             return { gray, w, h, color: item.color || "#000000" };
           } catch (e) {
@@ -113,8 +114,6 @@ export default function DuotoneGallery({ images, alt }) {
         if (progress < 1) {
           raf = requestAnimationFrame(step);
         } else {
-          // buildUp = true  -> Endzustand ist die volle Farbfläche -> kurze Haltezeit
-          // buildUp = false -> Endzustand ist "Bild komplett weg" -> lange Haltezeit
           const holdTime = buildUp ? HOLD_DURATION_FULL : HOLD_DURATION_EMPTY;
           timeout = setTimeout(() => {
             if (!cancelled) setIndex((i) => (i + 1) % prepared.length);
