@@ -4,13 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
-const REVEAL_DURATION = 5500; // ms - wie lange der Auf-/Abbau pro Bild dauert
-const HOLD_DURATION = 1000; // ms - wie lange das fertige Bild stehen bleibt
-const THRESHOLD_TARGET = 255; // "voller Wert" (wie Photoshops Schwellenwert-Regler)
+const REVEAL_DURATION = 2000; // ms - wie lange der Auf-/Abbau pro Bild dauert
+const HOLD_DURATION_FULL = 1000; // ms - wie lange die volle Farbfläche stehen bleibt (kürzer)
+const HOLD_DURATION_EMPTY = 3000; // ms - wie lange der leere Zustand (Bild komplett weg) stehen bleibt (länger)
+const THRESHOLD_TARGET = 128; // "voller Wert" (wie Photoshops Schwellenwert-Regler)
 
-function easeInOutQuad(t) {
-  return Math.pow(t, 3);
-}
 // Lädt ein Bild und berechnet einmalig die Graustufen-Werte pro Pixel.
 function loadGrayscale(url) {
   return new Promise((resolve, reject) => {
@@ -108,17 +106,19 @@ export default function DuotoneGallery({ images, alt }) {
       function step(now) {
         if (cancelled) return;
         const progress = Math.min(1, (now - start) / REVEAL_DURATION);
-        const eased = easeInOutQuad(progress);
-    const thresholdValue = buildUp
-      ? eased * THRESHOLD_TARGET
-      : THRESHOLD_TARGET * (1 - eased);
+        const thresholdValue = buildUp
+          ? progress * THRESHOLD_TARGET
+          : THRESHOLD_TARGET * (1 - progress);
         render(item, thresholdValue);
         if (progress < 1) {
           raf = requestAnimationFrame(step);
         } else {
+          // buildUp = true  -> Endzustand ist die volle Farbfläche -> kurze Haltezeit
+          // buildUp = false -> Endzustand ist "Bild komplett weg" -> lange Haltezeit
+          const holdTime = buildUp ? HOLD_DURATION_FULL : HOLD_DURATION_EMPTY;
           timeout = setTimeout(() => {
             if (!cancelled) setIndex((i) => (i + 1) % prepared.length);
-          }, HOLD_DURATION);
+          }, holdTime);
         }
       }
       raf = requestAnimationFrame(step);
