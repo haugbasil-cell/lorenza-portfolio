@@ -34,7 +34,6 @@ export default async function Home() {
       <div className={styles.textBlock}>
         <p>{name}</p>
        <p>
-  Portfolio:{' '}
   {years.map((y, i) => (
     <span key={i}>
       
@@ -51,7 +50,6 @@ export default async function Home() {
   ))}
 </p>
         <p>
-          Email:{' '}
           <a href={`mailto:${email}`}>{email}</a>
         </p>
         <p>{name} © {copyrightYear} All Rights Reserved</p>
