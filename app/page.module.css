@@ -8,8 +8,8 @@
 
 .imageWrap {
   position: absolute;
-  top: 30px;
-  left: 30px;
+  top: 25px;
+  left: 25px;
   max-width: 320px;
   max-height: 70dvh;
 }
@@ -38,10 +38,10 @@
 
 .textBlock {
   position: absolute;
-  bottom: 30px;
-  left: 30px;
-  color: #ffffff;
-  mix-blend-mode: difference;
+  bottom: 25px;
+  left: 25px;
+  z-index: 3;
+  color: #020202;
   font-family: var(--font-mono, monospace);
   font-size: 16px;
   line-height: 1.5;
@@ -60,6 +60,7 @@
 
 .textBlock a:hover {
   font-style: italic;
+  color: #ffffff;
 }
 
 .highlighted {
