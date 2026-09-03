@@ -52,7 +52,7 @@ export default async function Home() {
         <p>
           <a href={`mailto:${email}`}>{email}</a>
         </p>
-        <p>{name} © {copyrightYear} All Rights Reserved</p>
+        <p>© {copyrightYear} All Rights Reserved</p>
       </div>
     </main>
   )
