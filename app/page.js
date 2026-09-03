@@ -17,7 +17,6 @@ export default async function Home() {
   const {
     name = 'Lorenza Longhi',
     email = '',
-    instagram = '',
     copyrightYear = new Date().getFullYear().toString(),
     images = [],
     showMainImage = true,
@@ -54,16 +53,6 @@ export default async function Home() {
         <p>
           Email:{' '}
           <a href={`mailto:${email}`}>{email}</a>
-        </p>
-        <p>
-          Instagram:{' '}
-            <a
-            href={`https://instagram.com/${(instagram || '').replace('@', '')}`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {instagram}
-          </a>
         </p>
         <p>{name} © {copyrightYear} All Rights Reserved</p>
       </div>
