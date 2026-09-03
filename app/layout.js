@@ -4,22 +4,22 @@ import "./globals.css";
 const unFont = localFont({
   src: [
     {
-      path: "./fonts/UN11-Regular.woff2",
+      path: "./fonts/UN-11ST-Regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "./fonts/UN11-Italic.woff2",
+      path: "./fonts/UN-11ST-Italic.woff2",
       weight: "400",
       style: "italic",
     },
     {
-      path: "./fonts/UN11-Bold.woff2",
+      path: "./fonts/UN-11ST-Bold.woff2",
       weight: "700",
       style: "normal",
     },
     {
-      path: "./fonts/UN11-BoldItalic.woff2",
+      path: "./fonts/UN-11ST-BoldItalic.woff2",
       weight: "700",
       style: "italic",
     },
