@@ -60,6 +60,7 @@
 
 .textBlock a:hover {
   font-style: italic;
+  color: #ffffff;
 }
 
 .highlighted {
