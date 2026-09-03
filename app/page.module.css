@@ -65,10 +65,7 @@
 }
 .duotoneWrap {
   position: absolute;
-  top: 60px;
-  left: 60px;
-  right: 60px;
-  bottom: 60px;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
