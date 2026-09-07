@@ -19,8 +19,8 @@ export default function HomeContent({
   const [hovering, setHovering] = useState(false);
   const [isTouch, setIsTouch] = useState(false);
 
-  useEffect(() => {
-    const touch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+   useEffect(() => {
+    const touch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
     setIsTouch(touch);
   }, []);
 
