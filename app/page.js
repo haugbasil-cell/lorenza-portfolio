@@ -28,7 +28,6 @@ export default async function Home() {
 
   return (
     <main className={styles.page} style={{ backgroundColor }}>
-{showDuotoneGallery && <DuotoneGallery images={duotoneImages} alt={name} />}
      {showMainImage && <RandomImage images={images} alt={name} />}
 
       <div className={styles.textBlock}>
@@ -54,6 +53,8 @@ export default async function Home() {
         </p>
         <p>© {copyrightYear} All Rights Reserved</p>
       </div>
+
+{showDuotoneGallery && <DuotoneGallery images={duotoneImages} alt={name} />}
     </main>
   )
 }
