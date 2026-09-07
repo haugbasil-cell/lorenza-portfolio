@@ -4,13 +4,13 @@ import { useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
-const REVEAL_DURATION = 3000; // ms - wie lange der Auf-/Abbau pro Bild dauert
-const HOLD_DURATION_FULL = 5000; // ms - wie lange die volle Farbfläche stehen bleibt (kürzer)
-const HOLD_DURATION_EMPTY = 10000; // ms - wie lange der leere Zustand (Bild komplett weg) stehen bleibt (länger)
-const THRESHOLD_TARGET = 250; // "voller Wert" (wie Photoshops Schwellenwert-Regler)
-const SOURCE_WIDTH = 1600; // Auflösung für Sanity-Abruf UND Graustufen-Berechnung
-const START_DELAY = 5 * 1000; // 5 Sekunden, bevor die Animation überhaupt startet
-// Lädt ein Bild und berechnet einmalig die Graustufen-Werte pro Pixel.
+const REVEAL_DURATION = 5000;
+const HOLD_DURATION_FULL = 3000;
+const HOLD_DURATION_EMPTY = 5000;
+const THRESHOLD_TARGET = 255;
+const SOURCE_WIDTH = 1600;
+const START_DELAY = 5 * 1000;
+
 function loadGrayscale(url) {
   return new Promise((resolve, reject) => {
     const img = new window.Image();
@@ -44,15 +44,11 @@ export default function DuotoneGallery({ images, alt }) {
   const [index, setIndex] = useState(0);
   const [started, setStarted] = useState(false);
 
-  // Startverzögerung: Animation beginnt erst nach START_DELAY.
   useEffect(() => {
     const timer = setTimeout(() => setStarted(true), START_DELAY);
     return () => clearTimeout(timer);
   }, []);
 
-  // Alle Bilder einmalig vorbereiten (Graustufen berechnen) - läuft
-  // unabhängig von der Verzögerung im Hintergrund, damit beim Start
-  // sofort alles bereit ist.
   useEffect(() => {
     let cancelled = false;
     async function prepareAll() {
@@ -63,13 +59,7 @@ export default function DuotoneGallery({ images, alt }) {
             const { gray, w, h } = await loadGrayscale(
               urlFor(item.image).width(SOURCE_WIDTH).quality(85).url()
             );
-            return {
-              gray,
-              w,
-              h,
-              color: item.color || "#000000",
-              fullBleed: item.fullBleed === true,
-            };
+            return { gray, w, h, color: item.color || "#000000" };
           } catch (e) {
             return null;
           }
@@ -83,8 +73,6 @@ export default function DuotoneGallery({ images, alt }) {
     };
   }, [images]);
 
-  // Animation: Bild 1 baut sich auf (0 -> voll), Bild 2 baut sich ab
-  // (voll -> 0), Bild 3 wieder auf, usw. - im Wechsel je nach Index.
   useEffect(() => {
     if (!started) return;
     if (prepared.length === 0) return;
@@ -151,21 +139,13 @@ export default function DuotoneGallery({ images, alt }) {
 
   if (!started || !prepared || prepared.length === 0) return null;
 
-  const current = prepared[index % prepared.length];
-  const wrapClass = current.fullBleed
-    ? styles.duotoneWrapFullBleed
-    : styles.duotoneWrapPassepartout;
-  const imageClass = current.fullBleed
-    ? styles.duotoneImageFullBleed
-    : styles.duotoneImagePassepartout;
-
   return (
-    <div className={wrapClass}>
+    <div className={styles.duotoneWrap}>
       <canvas
         ref={canvasRef}
         role="img"
         aria-label={alt}
-        className={imageClass}
+        className={styles.duotoneImage}
       />
     </div>
   );

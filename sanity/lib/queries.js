@@ -1,7 +1,5 @@
 import { groq } from 'next-sanity'
 
-// GROQ = die Abfragesprache von Sanity (ähnlich wie eine Datenbank-Query).
-// Holt das einzige "homepage"-Dokument mitsamt allen Feldern, die wir brauchen.
 export const homepageQuery = groq`
   *[_type == "homepage"][0]{
     name,
@@ -17,8 +15,7 @@ images[]{
 showDuotoneGallery,
 duotoneImages[]{
   "image": image,
-  "color": color.hex,
-  fullBleed
+  "color": color.hex
 },
     "backgroundColor": backgroundColor.hex,
     years[]{

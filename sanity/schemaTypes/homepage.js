@@ -54,6 +54,7 @@ defineField({
   type: 'boolean',
   initialValue: true,
 }),
+
 defineField({
   name: 'duotoneImages',
   title: 'Zweifarben-Bildergalerie (zentriert, wechselt automatisch)',
@@ -76,20 +77,12 @@ defineField({
           type: 'color',
           description: 'Diese Farbe ersetzt die dunklen Bereiche des Bilds im Zweifarben-Effekt.',
         }),
-        defineField({
-          name: 'fullBleed',
-          title: 'Randlos (Fullbleed)',
-          type: 'boolean',
-          description:
-            'An: Bild füllt den ganzen Bildschirm randlos aus. Aus: Bild erscheint klein und zentriert, mit Rand ringsum (Passepartout-Stil).',
-          initialValue: true,
-        }),
       ],
       preview: { select: { media: 'image' } },
     },
   ],
   description:
-    'Bilder für die zentrierte Galerie über dem Textblock. Jedes Bild wird automatisch in ein Zweifarben-Muster umgewandelt und wechselt alle paar Sekunden.',
+    'Bilder für die Galerie über dem Textblock. Jedes Bild wird automatisch in ein Zweifarben-Muster umgewandelt und wechselt alle paar Sekunden.',
 }),
     defineField({
       name: 'backgroundColor',
