@@ -9,8 +9,7 @@ const HOLD_DURATION_FULL = 1000; // ms - wie lange die volle Farbfläche stehen 
 const HOLD_DURATION_EMPTY = 3000; // ms - wie lange der leere Zustand (Bild komplett weg) stehen bleibt (länger)
 const THRESHOLD_TARGET = 250; // "voller Wert" (wie Photoshops Schwellenwert-Regler)
 const SOURCE_WIDTH = 1600; // Auflösung für Sanity-Abruf UND Graustufen-Berechnung
-const START_DELAY = 5 * 60 * 1000; // 5 Minuten, bevor die Animation überhaupt startet
-
+const START_DELAY = 5 * 1000; // 5 Sekunden, bevor die Animation überhaupt startet
 // Lädt ein Bild und berechnet einmalig die Graustufen-Werte pro Pixel.
 function loadGrayscale(url) {
   return new Promise((resolve, reject) => {
