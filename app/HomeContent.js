@@ -19,7 +19,10 @@ export default function HomeContent({
   const [hovering, setHovering] = useState(false);
 
   return (
-    <main className={styles.page} style={{ backgroundColor }}>
+    <main
+      className={styles.page}
+      style={{ backgroundColor: hovering ? "#000000" : backgroundColor }}
+    >
       {showMainImage && (
         <RandomImage
           images={images}
@@ -56,7 +59,7 @@ export default function HomeContent({
         <p>© {copyrightYear} All Rights Reserved</p>
       </div>
 
-      {showDuotoneGallery && (
+      {showDuotoneGallery && hovering && (
         <DuotoneGallery images={duotoneImages} alt={name} />
       )}
     </main>

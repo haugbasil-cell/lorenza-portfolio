@@ -4,12 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
-const REVEAL_DURATION = 3000;
+const REVEAL_DURATION = 1500;
 const HOLD_DURATION_FULL = 1000;
-const HOLD_DURATION_EMPTY = 3000;
-const THRESHOLD_TARGET = 250;
-const SOURCE_WIDTH = 1600;
-const START_DELAY = 5 * 1000;
+const HOLD_DURATION_EMPTY = 1000;
+const THRESHOLD_TARGET = 255;
+const SOURCE_WIDTH = 3500;
 
 function loadGrayscale(url) {
   return new Promise((resolve, reject) => {
@@ -42,12 +41,6 @@ export default function DuotoneGallery({ images, alt }) {
   const canvasRef = useRef(null);
   const [prepared, setPrepared] = useState([]);
   const [index, setIndex] = useState(0);
-  const [started, setStarted] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => setStarted(true), START_DELAY);
-    return () => clearTimeout(timer);
-  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -74,7 +67,6 @@ export default function DuotoneGallery({ images, alt }) {
   }, [images]);
 
   useEffect(() => {
-    if (!started) return;
     if (prepared.length === 0) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -135,9 +127,9 @@ export default function DuotoneGallery({ images, alt }) {
       if (raf) cancelAnimationFrame(raf);
       if (timeout) clearTimeout(timeout);
     };
-  }, [prepared, index, started]);
+  }, [prepared, index]);
 
-  if (!started || !prepared || prepared.length === 0) return null;
+  if (!prepared || prepared.length === 0) return null;
 
   return (
     <div className={styles.duotoneWrap}>
