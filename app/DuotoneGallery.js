@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
-const REVEAL_DURATION = 1500;
-const HOLD_DURATION_FULL = 1000;
-const HOLD_DURATION_EMPTY = 1000;
+const REVEAL_DURATION = 3000;
+const HOLD_DURATION_FULL = 1500;
+const HOLD_DURATION_EMPTY = 1500;
 const THRESHOLD_TARGET = 255;
 const SOURCE_WIDTH = 3500;
 
