@@ -8,8 +8,8 @@
 
 .imageWrap {
   position: absolute;
-  top: 20px;
-  left: 20px;
+  top: 40px;
+  left: 40px;
   max-width: 300px;
   max-height: 60dvh;
 }
@@ -38,8 +38,8 @@
 
 .textBlock {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 40px;
+  left: 40px;
   z-index: 3;
   color: #020202;
   font-family: var(--font-mono, monospace);
@@ -85,10 +85,10 @@
 
 .duotoneWrapPassepartout {
   position: absolute;
-  top: 0%;
+  top: 15%;
   left: 15%;
   right: 15%;
-  bottom: 0%;
+  bottom: 15%;
   display: flex;
   align-items: center;
   justify-content: center;
