@@ -85,10 +85,10 @@
 
 .duotoneWrapPassepartout {
   position: absolute;
-  top: 15%;
-  left: 15%;
-  right: 15%;
-  bottom: 15%;
+  top: 60px;
+  left: 60px;
+  right: 60px;
+  bottom: 60px;
   display: flex;
   align-items: center;
   justify-content: center;
