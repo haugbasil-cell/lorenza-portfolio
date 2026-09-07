@@ -4,11 +4,11 @@ import { useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
-const REVEAL_DURATION = 5000;
-const HOLD_DURATION_FULL = 3000;
-const HOLD_DURATION_EMPTY = 5000;
-const THRESHOLD_TARGET = 255;
-const SOURCE_WIDTH = 2500;
+const REVEAL_DURATION = 3000;
+const HOLD_DURATION_FULL = 1000;
+const HOLD_DURATION_EMPTY = 3000;
+const THRESHOLD_TARGET = 250;
+const SOURCE_WIDTH = 1600;
 const START_DELAY = 5 * 1000;
 
 function loadGrayscale(url) {

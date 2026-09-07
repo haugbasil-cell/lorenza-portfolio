@@ -1,8 +1,6 @@
 import { client } from '@/sanity/lib/client'
 import { homepageQuery } from '@/sanity/lib/queries'
-import RandomImage from './RandomImage'
-import DuotoneGallery from './DuotoneGallery'
-import styles from './page.module.css'
+import HomeContent from './HomeContent'
 
 export const revalidate = 30
 
@@ -27,34 +25,16 @@ export default async function Home() {
   } = data || {}
 
   return (
-    <main className={styles.page} style={{ backgroundColor }}>
-     {showMainImage && <RandomImage images={images} alt={name} />}
-
-      <div className={styles.textBlock}>
-        <p>{name}</p>
-       <p>
-  {years.map((y, i) => (
-    <span key={i}>
-      
-         <a
-        href={y.pdfUrl || '#'}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={y.highlighted ? styles.highlighted : undefined}
-      >
-        {y.label}
-      </a>
-      {i < years.length - 1 ? ', ' : ''}
-    </span>
-  ))}
-</p>
-        <p>
-          <a href={`mailto:${email}`}>{email}</a>
-        </p>
-        <p>© {copyrightYear} All Rights Reserved</p>
-      </div>
-
-{showDuotoneGallery && <DuotoneGallery images={duotoneImages} alt={name} />}
-    </main>
+    <HomeContent
+      name={name}
+      email={email}
+      copyrightYear={copyrightYear}
+      images={images}
+      showMainImage={showMainImage}
+      duotoneImages={duotoneImages}
+      showDuotoneGallery={showDuotoneGallery}
+      backgroundColor={backgroundColor}
+      years={years}
+    />
   )
 }

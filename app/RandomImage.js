@@ -5,7 +5,7 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
-export default function RandomImage({ images, alt }) {
+export default function RandomImage({ images, alt, hidden, onMouseEnter, onMouseLeave }) {
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
@@ -29,13 +29,19 @@ export default function RandomImage({ images, alt }) {
     return <div className={styles.imageWrap} />;
   }
 
- const width = selected.dimensions?.width || 800;
+  const width = selected.dimensions?.width || 800;
   const height = selected.dimensions?.height || 1200;
   const wrapClass = selected.fullBleed ? styles.imageWrapFullBleed : styles.imageWrap;
   const imgClass = selected.fullBleed ? styles.imageFullBleed : styles.image;
-const sourceWidth = selected.fullBleed ? 1800 : 640;
+  const sourceWidth = selected.fullBleed ? 1800 : 640;
+
   return (
-    <div className={wrapClass}>
+    <div
+      className={wrapClass}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      style={{ opacity: hidden ? 0 : 1, transition: "opacity 0.3s ease" }}
+    >
       <Image
         src={urlFor(selected.image).width(sourceWidth).quality(90).url()}
         alt={alt}
