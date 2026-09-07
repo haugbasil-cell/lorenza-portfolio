@@ -9,7 +9,7 @@
 .imageWrap {
   position: absolute;
   top: 30px;
-  left: 30px;
+  left: 60px;
   max-width: 300px;
   max-height: 60dvh;
 }
@@ -39,12 +39,12 @@
 .textBlock {
   position: absolute;
   bottom: 30px;
-  left: 30px;
+  left: 60px;
   z-index: 3;
   color: #020202;
   font-family: var(--font-mono, monospace);
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 2;
   font-weight: 700;
   text-transform: uppercase;
 }
