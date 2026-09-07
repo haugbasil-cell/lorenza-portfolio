@@ -3,7 +3,7 @@
   min-height: 100dvh;
   width: 100%;
   overflow: hidden;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, filter 0.3s ease;
 }
 
 .imageWrap {
@@ -111,4 +111,8 @@
   .textBlock {
     font-size: 14px;
   }
+}
+.page:has(.imageWrap:hover),
+.page:has(.imageWrapFullBleed:hover) {
+  filter: invert(1);
 }
