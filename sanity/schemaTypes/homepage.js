@@ -76,6 +76,14 @@ defineField({
           type: 'color',
           description: 'Diese Farbe ersetzt die dunklen Bereiche des Bilds im Zweifarben-Effekt.',
         }),
+        defineField({
+          name: 'fullBleed',
+          title: 'Randlos (Fullbleed)',
+          type: 'boolean',
+          description:
+            'An: Bild füllt den ganzen Bildschirm randlos aus. Aus: Bild erscheint klein und zentriert, mit Rand ringsum (Passepartout-Stil).',
+          initialValue: true,
+        }),
       ],
       preview: { select: { media: 'image' } },
     },

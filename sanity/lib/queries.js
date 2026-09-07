@@ -17,7 +17,8 @@ images[]{
 showDuotoneGallery,
 duotoneImages[]{
   "image": image,
-  "color": color.hex
+  "color": color.hex,
+  fullBleed
 },
     "backgroundColor": backgroundColor.hex,
     years[]{
