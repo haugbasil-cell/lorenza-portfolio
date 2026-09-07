@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RandomImage from "./RandomImage";
 import DuotoneGallery from "./DuotoneGallery";
 import styles from "./page.module.css";
@@ -17,19 +17,26 @@ export default function HomeContent({
   years,
 }) {
   const [hovering, setHovering] = useState(false);
+  const [isTouch, setIsTouch] = useState(false);
+
+  useEffect(() => {
+    const touch = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+    setIsTouch(touch);
+  }, []);
 
   return (
     <main
       className={styles.page}
-      style={{ backgroundColor: hovering ? "#3a3a3a" : backgroundColor }}
+      style={{ backgroundColor: hovering ? "#000000" : backgroundColor }}
     >
       {showMainImage && (
         <RandomImage
           images={images}
           alt={name}
           hidden={hovering}
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
+          onMouseEnter={isTouch ? undefined : () => setHovering(true)}
+          onMouseLeave={isTouch ? undefined : () => setHovering(false)}
+          onClick={isTouch ? () => setHovering((h) => !h) : undefined}
         />
       )}
 
