@@ -85,11 +85,6 @@
   object-fit: cover;
 }
 
-.page:has(.imageWrap:hover),
-.page:has(.imageWrapFullBleed:hover) {
-  filter: invert(1);
-}
-
 @media (max-width: 600px) {
   .textBlock {
     font-size: 11px;
