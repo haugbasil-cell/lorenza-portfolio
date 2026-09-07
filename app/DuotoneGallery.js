@@ -8,7 +8,7 @@ const REVEAL_DURATION = 5000;
 const HOLD_DURATION_FULL = 3000;
 const HOLD_DURATION_EMPTY = 5000;
 const THRESHOLD_TARGET = 255;
-const SOURCE_WIDTH = 1600;
+const SOURCE_WIDTH = 2500;
 const START_DELAY = 5 * 1000;
 
 function loadGrayscale(url) {

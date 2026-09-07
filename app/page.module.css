@@ -10,8 +10,8 @@
   position: absolute;
   top: 30px;
   left: 30px;
-  max-width: 320px;
-  max-height: 70dvh;
+  max-width: 250px;
+  max-height: 60dvh;
 }
 
 .image {
@@ -42,7 +42,7 @@
   left: 30px;
   color: #020202;
   font-family: var(--font-mono, monospace);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
   font-weight: 700;
   text-transform: uppercase;
