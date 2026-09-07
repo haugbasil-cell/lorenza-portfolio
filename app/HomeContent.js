@@ -27,7 +27,7 @@ export default function HomeContent({
   return (
     <main
       className={styles.page}
-      style={{ backgroundColor: hovering ? "#000000" : backgroundColor }}
+      style={{ backgroundColor: hovering ? "#3c3c3c" : backgroundColor }}
     >
       {showMainImage && (
         <RandomImage
@@ -48,7 +48,7 @@ export default function HomeContent({
         <p>
           {years.map((y, i) => (
             <span key={i}>
-              <a
+              <a 
                 href={y.pdfUrl || '#'}
                 target="_blank"
                 rel="noopener noreferrer"
