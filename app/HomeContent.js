@@ -21,7 +21,7 @@ export default function HomeContent({
   return (
     <main
       className={styles.page}
-      style={{ backgroundColor: hovering ? "#000000" : backgroundColor }}
+      style={{ backgroundColor: hovering ? "#141414" : backgroundColor }}
     >
       {showMainImage && (
         <RandomImage

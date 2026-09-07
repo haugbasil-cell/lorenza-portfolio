@@ -52,7 +52,7 @@ export default function DuotoneGallery({ images, alt }) {
             const { gray, w, h } = await loadGrayscale(
               urlFor(item.image).width(SOURCE_WIDTH).quality(85).url()
             );
-            return { gray, w, h, color: item.color || "#1e1e1e" };
+            return { gray, w, h, color: item.color || "#000000" };
           } catch (e) {
             return null;
           }
