@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import RandomImage from "./RandomImage";
 import DuotoneGallery from "./DuotoneGallery";
 import styles from "./page.module.css";
@@ -17,12 +17,6 @@ export default function HomeContent({
   years,
 }) {
   const [hovering, setHovering] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
-
-   useEffect(() => {
-    const touch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
-    setIsTouch(touch);
-  }, []);
 
   return (
     <main
@@ -34,9 +28,9 @@ export default function HomeContent({
           images={images}
           alt={name}
           hidden={hovering}
-          onMouseEnter={isTouch ? undefined : () => setHovering(true)}
-          onMouseLeave={isTouch ? undefined : () => setHovering(false)}
-          onClick={isTouch ? () => setHovering((h) => !h) : undefined}
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+          onClick={() => setHovering((h) => !h)}
         />
       )}
 
@@ -48,7 +42,7 @@ export default function HomeContent({
         <p>
           {years.map((y, i) => (
             <span key={i}>
-              <a 
+              <a
                 href={y.pdfUrl || '#'}
                 target="_blank"
                 rel="noopener noreferrer"
