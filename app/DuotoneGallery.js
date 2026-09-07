@@ -5,9 +5,9 @@ import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
 const REVEAL_DURATION = 5000; // ms - wie lange der Auf-/Abbau pro Bild dauert
-const HOLD_DURATION_FULL = 2000; // ms - wie lange die volle Farbfläche stehen bleibt (kürzer)
-const HOLD_DURATION_EMPTY = 3000; // ms - wie lange der leere Zustand (Bild komplett weg) stehen bleibt (länger)
-const THRESHOLD_TARGET = 250; // "voller Wert" (wie Photoshops Schwellenwert-Regler)
+const HOLD_DURATION_FULL = 2500; // ms - wie lange die volle Farbfläche stehen bleibt (kürzer)
+const HOLD_DURATION_EMPTY = 5000; // ms - wie lange der leere Zustand (Bild komplett weg) stehen bleibt (länger)
+const THRESHOLD_TARGET = 255; // "voller Wert" (wie Photoshops Schwellenwert-Regler)
 const SOURCE_WIDTH = 3000; // Auflösung für Sanity-Abruf UND Graustufen-Berechnung (höher = feineres Raster)
 
 // Lädt ein Bild und berechnet einmalig die Graustufen-Werte pro Pixel.
