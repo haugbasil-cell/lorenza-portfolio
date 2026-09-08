@@ -78,12 +78,17 @@
   pointer-events: none;
 }
 
-.duotoneImage {
+.duotoneFrame {
   aspect-ratio: 17 / 11;
   width: auto;
   height: auto;
   max-width: 100%;
   max-height: 100%;
+}
+
+.duotoneImage {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
 }

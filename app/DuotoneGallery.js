@@ -134,12 +134,14 @@ export default function DuotoneGallery({ images, alt, active }) {
 
   return (
     <div className={styles.duotoneWrap}>
-      <canvas
-        ref={canvasRef}
-        role="img"
-        aria-label={alt}
-        className={styles.duotoneImage}
-      />
+      <div className={styles.duotoneFrame}>
+        <canvas
+          ref={canvasRef}
+          role="img"
+          aria-label={alt}
+          className={styles.duotoneImage}
+        />
+      </div>
     </div>
   );
 }
