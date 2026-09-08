@@ -39,7 +39,7 @@ export default function HomeContent({
       >
         <p>{name}</p>
         <p>
-          Portfolio:{' '}
+          Downloads:{' '}
           {years.map((y, i) => (
             <span key={i}>
               <a 
@@ -71,7 +71,8 @@ export default function HomeContent({
             ))}
           </p>
         )}
-        <p>
+               <p>
+          Contact:{' '}
           <a href={`mailto:${email}`}>{email}</a>
         </p>
         <p>© {copyrightYear} All Rights Reserved</p>
