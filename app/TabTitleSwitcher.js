@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const AWAY_TITLE = "i miss you";
+const AWAY_TITLE = "Miss you";
 
 export default function TabTitleSwitcher() {
   useEffect(() => {
