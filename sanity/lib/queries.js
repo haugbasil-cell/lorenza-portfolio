@@ -23,6 +23,10 @@ duotoneImages[]{
       label,
       highlighted,
       "pdfUrl": pdf.asset->url
+    },
+    galleries[]{
+      name,
+      url
     }
   }
 `

@@ -10,87 +10,86 @@ export default defineType({
       title: 'Interner Titel (nur zur Orientierung im Studio)',
       type: 'string',
       initialValue: 'Startseite',
-    }),  
-  defineField({
-  name: 'showMainImage',
-  title: 'Bildergalerie oben links anzeigen',
-  type: 'boolean',
-  initialValue: true,
-}),
-   defineField({
-  name: 'images',
-  title: 'Bilder (oben links, zufällige Auswahl)',
-  type: 'array',
-  of: [
-    {
-      type: 'object',
-      name: 'galleryImage',
-      title: 'Bild',
-      fields: [
-        defineField({
-          name: 'image',
-          title: 'Bilddatei',
-          type: 'image',
-          options: { hotspot: true },
-        }),
-        defineField({
-          name: 'fullBleed',
-          title: 'Randlos (Fullbleed)',
-          type: 'boolean',
-          description:
-            'An: Bild füllt die linke Spalte randlos von oben bis unten. Aus: Bild erscheint klein, mit Abstand zum Rand.',
-          initialValue: false,
-        }),
+    }),
+    defineField({
+      name: 'showMainImage',
+      title: 'Bildergalerie oben links anzeigen',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'images',
+      title: 'Bilder (oben links, zufällige Auswahl)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'galleryImage',
+          title: 'Bild',
+          fields: [
+            defineField({
+              name: 'image',
+              title: 'Bilddatei',
+              type: 'image',
+              options: { hotspot: true },
+            }),
+            defineField({
+              name: 'fullBleed',
+              title: 'Randlos (Fullbleed)',
+              type: 'boolean',
+              description:
+                'An: Bild füllt die linke Spalte randlos von oben bis unten. Aus: Bild erscheint klein, mit Abstand zum Rand.',
+              initialValue: false,
+            }),
+          ],
+          preview: { select: { media: 'image', fullBleed: 'fullBleed' } },
+        },
       ],
-      preview: { select: { media: 'image', fullBleed: 'fullBleed' } },
-    },
-  ],
-  description:
-    'Lade hier mehrere Bilder hoch. Bei jedem Laden der Seite wird zufällig eines davon angezeigt.',
-}),
-defineField({
-  name: 'showDuotoneGallery',
-  title: 'Zweifarben-Galerie anzeigen',
-  type: 'boolean',
-  initialValue: true,
-}),
-
-defineField({
-  name: 'duotoneImages',
-  title: 'Zweifarben-Bildergalerie (zentriert, wechselt automatisch)',
-  type: 'array',
-  of: [
-    {
-      type: 'object',
-      name: 'duotoneImage',
-      title: 'Bild',
-      fields: [
-        defineField({
-          name: 'image',
-          title: 'Bilddatei',
-          type: 'image',
-          options: { hotspot: true },
-        }),
-        defineField({
-          name: 'color',
-          title: 'Akzentfarbe',
-          type: 'color',
-          description: 'Diese Farbe ersetzt die dunklen Bereiche des Bilds im Zweifarben-Effekt.',
-        }),
-        defineField({
-          name: 'rotateFrame',
-          title: 'Rahmen drehen (für Hochformat-Bilder)',
-          type: 'boolean',
-          description: 'An: Rahmen wird quer (11:8.5) statt hoch (8.5:11) angezeigt, passend für Hochformat-Bilder.',
-          initialValue: false,
-        }),
+      description:
+        'Lade hier mehrere Bilder hoch. Bei jedem Laden der Seite wird zufällig eines davon angezeigt.',
+    }),
+    defineField({
+      name: 'showDuotoneGallery',
+      title: 'Zweifarben-Galerie anzeigen',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'duotoneImages',
+      title: 'Zweifarben-Bildergalerie (zentriert, wechselt automatisch)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'duotoneImage',
+          title: 'Bild',
+          fields: [
+            defineField({
+              name: 'image',
+              title: 'Bilddatei',
+              type: 'image',
+              options: { hotspot: true },
+            }),
+            defineField({
+              name: 'color',
+              title: 'Akzentfarbe',
+              type: 'color',
+              description: 'Diese Farbe ersetzt die dunklen Bereiche des Bilds im Zweifarben-Effekt.',
+            }),
+            defineField({
+              name: 'rotateFrame',
+              title: 'Rahmen drehen (für Hochformat-Bilder)',
+              type: 'boolean',
+              description: 'An: Rahmen wird quer statt hoch angezeigt, passend für Hochformat-Bilder.',
+              initialValue: false,
+            }),
+          ],
+          preview: { select: { media: 'image' } },
+        },
       ],
-      preview: { select: { media: 'image' } },
-    },
-  ],
-  description:
-    'Bilder für die Galerie über dem Textblock. Jedes Bild wird automatisch in ein Zweifarben-Muster umgewandelt und wechselt alle paar Sekunden.',
-}),
+      description:
+        'Bilder für die Galerie über dem Textblock. Jedes Bild wird automatisch in ein Zweifarben-Muster umgewandelt und wechselt alle paar Sekunden.',
+    }),
     defineField({
       name: 'backgroundColor',
       title: 'Hintergrundfarbe',
@@ -155,6 +154,25 @@ defineField({
           preview: {
             select: { title: 'label' },
           },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'galleries',
+      title: 'Galerien (Represented by)',
+      description:
+        'Galerien, die Lorenza vertreten. Erscheinen als eigene Zeile mit Links zu den jeweiligen Webseiten.',
+      type: 'array',
+      of: [
+        defineField({
+          name: 'galleryEntry',
+          title: 'Galerie',
+          type: 'object',
+          fields: [
+            defineField({ name: 'name', title: 'Name', type: 'string' }),
+            defineField({ name: 'url', title: 'Website', type: 'url' }),
+          ],
+          preview: { select: { title: 'name', subtitle: 'url' } },
         }),
       ],
     }),

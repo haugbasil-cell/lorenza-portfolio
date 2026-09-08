@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import RandomImage from "./RandomImage";
 import DuotoneGallery from "./DuotoneGallery";
 import styles from "./page.module.css";
@@ -15,18 +15,10 @@ export default function HomeContent({
   showDuotoneGallery,
   backgroundColor,
   years,
+  galleries,
 }) {
   const [hovering, setHovering] = useState(false);
   const activeColor = hovering ? "#3f3f3f" : backgroundColor;
-
-  // Synchronisiert html/body-Hintergrund mit dem aktuellen Zustand,
-  // damit auf iOS der Bounce-Effekt oben/unten beim Scrollen die
-  // richtige Farbe zeigt (normal ODER schwarz bei Hover), statt einer
-  // fest einprogrammierten Farbe.
-  useEffect(() => {
-    document.documentElement.style.backgroundColor = activeColor;
-    document.body.style.backgroundColor = activeColor;
-  }, [activeColor]);
 
   return (
     <main className={styles.page} style={{ backgroundColor: activeColor }}>
@@ -47,9 +39,10 @@ export default function HomeContent({
       >
         <p>{name}</p>
         <p>
+          Portfolio:{' '}
           {years.map((y, i) => (
             <span key={i}>
-              <a
+              <a 
                 href={y.pdfUrl || '#'}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -61,6 +54,23 @@ export default function HomeContent({
             </span>
           ))}
         </p>
+        {galleries.length > 0 && (
+          <p>
+            Represented by:{' '}
+            {galleries.map((g, i) => (
+              <span key={i}>
+                {g.url ? (
+                  <a href={g.url} target="_blank" rel="noopener noreferrer">
+                    {g.name}
+                  </a>
+                ) : (
+                  g.name
+                )}
+                {i < galleries.length - 1 ? ', ' : ''}
+              </span>
+            ))}
+          </p>
+        )}
         <p>
           <a href={`mailto:${email}`}>{email}</a>
         </p>
