@@ -95,7 +95,7 @@
 
 @media (max-width: 600px) {
   .textBlock {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
@@ -104,6 +104,6 @@
     top: 80px;
     left: 20px;
     right: 20px;
-    bottom: 800px;
+    bottom: 80px;
   }
 }
