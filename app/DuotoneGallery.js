@@ -37,7 +37,7 @@ function loadGrayscale(url) {
   });
 }
 
-export default function DuotoneGallery({ images, alt }) {
+export default function DuotoneGallery({ images, alt, active }) {
   const canvasRef = useRef(null);
   const [prepared, setPrepared] = useState([]);
   const [index, setIndex] = useState(0);
@@ -67,6 +67,7 @@ export default function DuotoneGallery({ images, alt }) {
   }, [images]);
 
   useEffect(() => {
+    if (!active) return;
     if (prepared.length === 0) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -127,9 +128,9 @@ export default function DuotoneGallery({ images, alt }) {
       if (raf) cancelAnimationFrame(raf);
       if (timeout) clearTimeout(timeout);
     };
-  }, [prepared, index]);
+  }, [prepared, index, active]);
 
-  if (!prepared || prepared.length === 0) return null;
+  if (!active || !prepared || prepared.length === 0) return null;
 
   return (
     <div className={styles.duotoneWrap}>
