@@ -22,7 +22,7 @@ export default async function Home() {
     showDuotoneGallery = true,
     backgroundColor = '#3D0F35',
     years = [],
-    galleries = [],
+    galleries,
   } = data || {}
 
   return (
@@ -36,7 +36,7 @@ export default async function Home() {
       showDuotoneGallery={showDuotoneGallery}
       backgroundColor={backgroundColor}
       years={years}
-      galleries={galleries}
+      galleries={galleries || []}
     />
   )
 }
