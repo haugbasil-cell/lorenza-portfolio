@@ -9,6 +9,8 @@ const HOLD_DURATION_FULL = 1500;
 const HOLD_DURATION_EMPTY = 1500;
 const THRESHOLD_TARGET = 255;
 const SOURCE_WIDTH = 3500;
+const PORTRAIT_RATIO = 11 / 17;
+const LANDSCAPE_RATIO = 17 / 11;
 
 function loadGrayscale(url) {
   return new Promise((resolve, reject) => {
@@ -38,9 +40,11 @@ function loadGrayscale(url) {
 }
 
 export default function DuotoneGallery({ images, alt, active }) {
+  const wrapRef = useRef(null);
   const canvasRef = useRef(null);
   const [prepared, setPrepared] = useState([]);
   const [index, setIndex] = useState(0);
+  const [frameSize, setFrameSize] = useState({ width: 0, height: 0 });
 
   useEffect(() => {
     let cancelled = false;
@@ -52,7 +56,13 @@ export default function DuotoneGallery({ images, alt, active }) {
             const { gray, w, h } = await loadGrayscale(
               urlFor(item.image).width(SOURCE_WIDTH).quality(85).url()
             );
-            return { gray, w, h, color: item.color || "#000000" };
+            return {
+              gray,
+              w,
+              h,
+              color: item.color || "#000000",
+              rotateFrame: item.rotateFrame === true,
+            };
           } catch (e) {
             return null;
           }
@@ -65,6 +75,29 @@ export default function DuotoneGallery({ images, alt, active }) {
       cancelled = true;
     };
   }, [images]);
+
+  // Rahmengröße neu berechnen, wenn sich Fenster, Bilderliste oder das
+  // aktuell angezeigte Bild ändert (wegen möglicher rotateFrame-Option).
+  useEffect(() => {
+    function updateSize() {
+      const wrap = wrapRef.current;
+      if (!wrap || prepared.length === 0) return;
+      const current = prepared[index % prepared.length];
+      const ratio = current.rotateFrame ? LANDSCAPE_RATIO : PORTRAIT_RATIO;
+      const wrapWidth = wrap.clientWidth;
+      const wrapHeight = wrap.clientHeight;
+      let width = wrapWidth;
+      let height = width / ratio;
+      if (height > wrapHeight) {
+        height = wrapHeight;
+        width = height * ratio;
+      }
+      setFrameSize({ width, height });
+    }
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, [prepared, index]);
 
   useEffect(() => {
     if (!active) return;
@@ -133,8 +166,11 @@ export default function DuotoneGallery({ images, alt, active }) {
   if (!active || !prepared || prepared.length === 0) return null;
 
   return (
-    <div className={styles.duotoneWrap}>
-      <div className={styles.duotoneFrame}>
+    <div className={styles.duotoneWrap} ref={wrapRef}>
+      <div
+        className={styles.duotoneFrame}
+        style={{ width: frameSize.width, height: frameSize.height }}
+      >
         <canvas
           ref={canvasRef}
           role="img"

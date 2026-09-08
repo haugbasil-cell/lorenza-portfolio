@@ -77,6 +77,13 @@ defineField({
           type: 'color',
           description: 'Diese Farbe ersetzt die dunklen Bereiche des Bilds im Zweifarben-Effekt.',
         }),
+        defineField({
+          name: 'rotateFrame',
+          title: 'Rahmen drehen (für Hochformat-Bilder)',
+          type: 'boolean',
+          description: 'An: Rahmen wird quer (11:8.5) statt hoch (8.5:11) angezeigt, passend für Hochformat-Bilder.',
+          initialValue: false,
+        }),
       ],
       preview: { select: { media: 'image' } },
     },

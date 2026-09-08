@@ -15,7 +15,8 @@ images[]{
 showDuotoneGallery,
 duotoneImages[]{
   "image": image,
-  "color": color.hex
+  "color": color.hex,
+  rotateFrame
 },
     "backgroundColor": backgroundColor.hex,
     years[]{
