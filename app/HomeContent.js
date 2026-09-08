@@ -17,7 +17,7 @@ export default function HomeContent({
   years,
 }) {
   const [hovering, setHovering] = useState(false);
-  const activeColor = hovering ? "#000000" : backgroundColor;
+  const activeColor = hovering ? "#3f3f3f" : backgroundColor;
 
   // Synchronisiert html/body-Hintergrund mit dem aktuellen Zustand,
   // damit auf iOS der Bounce-Effekt oben/unten beim Scrollen die
