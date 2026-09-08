@@ -30,3 +30,9 @@ duotoneImages[]{
     }
   }
 `
+
+export const faviconQuery = groq`
+  *[_type == "homepage"][0]{
+    "faviconUrl": favicon.asset->url
+  }
+`
