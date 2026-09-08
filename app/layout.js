@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { client } from "@/sanity/lib/client";
 import { faviconQuery } from "@/sanity/lib/queries";
+import TabTitleSwitcher from "./TabTitleSwitcher";
 
 const unFont = localFont({
   src: [
@@ -48,7 +49,10 @@ export async function generateMetadata() {
 export default function RootLayout({ children }) {
   return (
     <html lang="de" className={unFont.variable}>
-      <body>{children}</body>
+      <body>
+        <TabTitleSwitcher />
+        {children}
+      </body>
     </html>
   );
 }
