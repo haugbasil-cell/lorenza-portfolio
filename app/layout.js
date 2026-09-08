@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import { client } from "@/sanity/lib/client";
+import { faviconQuery } from "@/sanity/lib/queries";
 
 const unFont = localFont({
   src: [
@@ -27,10 +29,21 @@ const unFont = localFont({
   variable: "--font-mono",
 });
 
-export const metadata = {
-  title: "Lorenza Longhi — Portfolio",
-  description: "Portfolio von Lorenza Longhi",
-};
+export async function generateMetadata() {
+  let faviconUrl = null;
+  try {
+    const data = await client.fetch(faviconQuery);
+    faviconUrl = data?.faviconUrl || null;
+  } catch (error) {
+    console.warn("Konnte Favicon nicht laden:", error.message);
+  }
+
+  return {
+    title: "Lorenza Longhi — Portfolio",
+    description: "Portfolio von Lorenza Longhi",
+    icons: faviconUrl ? { icon: faviconUrl } : undefined,
+  };
+}
 
 export default function RootLayout({ children }) {
   return (
