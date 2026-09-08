@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RandomImage from "./RandomImage";
 import DuotoneGallery from "./DuotoneGallery";
 import styles from "./page.module.css";
@@ -17,12 +17,19 @@ export default function HomeContent({
   years,
 }) {
   const [hovering, setHovering] = useState(false);
+  const activeColor = hovering ? "#000000" : backgroundColor;
+
+  // Synchronisiert html/body-Hintergrund mit dem aktuellen Zustand,
+  // damit auf iOS der Bounce-Effekt oben/unten beim Scrollen die
+  // richtige Farbe zeigt (normal ODER schwarz bei Hover), statt einer
+  // fest einprogrammierten Farbe.
+  useEffect(() => {
+    document.documentElement.style.backgroundColor = activeColor;
+    document.body.style.backgroundColor = activeColor;
+  }, [activeColor]);
 
   return (
-    <main
-      className={styles.page}
-      style={{ backgroundColor: hovering ? "#3c3c3c" : backgroundColor }}
-    >
+    <main className={styles.page} style={{ backgroundColor: activeColor }}>
       {showMainImage && (
         <RandomImage
           images={images}
@@ -60,8 +67,8 @@ export default function HomeContent({
         <p>© {copyrightYear} All Rights Reserved</p>
       </div>
 
-      {showDuotoneGallery && hovering && (
-        <DuotoneGallery images={duotoneImages} alt={name} />
+      {showDuotoneGallery && (
+        <DuotoneGallery images={duotoneImages} alt={name} active={hovering} />
       )}
     </main>
   );
