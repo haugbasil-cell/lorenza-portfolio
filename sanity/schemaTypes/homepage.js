@@ -11,6 +11,12 @@ export default defineType({
       type: 'string',
       initialValue: 'Startseite',
     }),
+       defineField({
+      name: 'favicon',
+      title: 'Favicon (Browser-Tab-Icon)',
+      type: 'image',
+      description: 'Kleines quadratisches Bild, das im Browser-Tab neben dem Seitentitel angezeigt wird (z. B. 512×512px, PNG).',
+    }),
     defineField({
       name: 'showMainImage',
       title: 'Bildergalerie oben links anzeigen',
