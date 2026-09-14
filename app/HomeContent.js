@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RandomImage from "./RandomImage";
 import DuotoneGallery from "./DuotoneGallery";
 import styles from "./page.module.css";
@@ -39,7 +39,7 @@ export default function HomeContent({
       >
         <p>{name}</p>
         <p>
-          Downloads:{' '}
+          Portfolio:{' '}
           {years.map((y, i) => (
             <span key={i}>
               <a 
@@ -71,7 +71,7 @@ export default function HomeContent({
             ))}
           </p>
         )}
-               <p>
+        <p>
           Contact:{' '}
           <a href={`mailto:${email}`}>{email}</a>
         </p>
@@ -84,11 +84,3 @@ export default function HomeContent({
     </main>
   );
 }
-  useEffect(() => {
-    document.documentElement.style.backgroundColor = activeColor;
-    document.body.style.backgroundColor = activeColor;
-    const themeMeta = document.querySelector('meta[name="theme-color"]');
-    if (themeMeta) {
-      themeMeta.setAttribute("content", activeColor);
-    }
-  }, [activeColor]);
