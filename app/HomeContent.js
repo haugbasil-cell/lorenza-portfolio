@@ -18,7 +18,7 @@ export default function HomeContent({
   galleries,
 }) {
   const [hovering, setHovering] = useState(false);
- const activeColor = backgroundColor;
+  const activeColor = backgroundColor;
 
   return (
     <main className={styles.page} style={{ backgroundColor: activeColor }}>
@@ -54,6 +54,10 @@ export default function HomeContent({
             </span>
           ))}
         </p>
+        <p>
+          Contact:{' '}
+          <a href={`mailto:${email}`}>{email}</a>
+        </p>
         {galleries.length > 0 && (
           <p>
             Represented by:{' '}
@@ -71,10 +75,6 @@ export default function HomeContent({
             ))}
           </p>
         )}
-        <p>
-          Contact:{' '}
-          <a href={`mailto:${email}`}>{email}</a>
-        </p>
         <p>© {copyrightYear} All Rights Reserved</p>
       </div>
 
