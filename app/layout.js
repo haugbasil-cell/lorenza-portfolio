@@ -32,17 +32,20 @@ const unFont = localFont({
 
 export async function generateMetadata() {
   let faviconUrl = null;
+  let backgroundColor = "#3D0F35";
   try {
     const data = await client.fetch(layoutQuery);
     faviconUrl = data?.faviconUrl || null;
+    backgroundColor = data?.backgroundColor || backgroundColor;
   } catch (error) {
-    console.warn("Konnte Favicon nicht laden:", error.message);
+    console.warn("Konnte Sanity-Daten nicht laden:", error.message);
   }
 
   return {
     title: "Lorenza Longhi — Portfolio",
     description: "Portfolio von Lorenza Longhi",
     icons: faviconUrl ? { icon: faviconUrl } : undefined,
+    themeColor: backgroundColor,
   };
 }
 

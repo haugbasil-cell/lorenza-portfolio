@@ -84,3 +84,11 @@ export default function HomeContent({
     </main>
   );
 }
+  useEffect(() => {
+    document.documentElement.style.backgroundColor = activeColor;
+    document.body.style.backgroundColor = activeColor;
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) {
+      themeMeta.setAttribute("content", activeColor);
+    }
+  }, [activeColor]);
