@@ -8,14 +8,17 @@ const REVEAL_DURATION = 3000;
 const HOLD_DURATION_FULL = 1500;
 const HOLD_DURATION_EMPTY = 1500;
 const THRESHOLD_TARGET = 255;
-const SOURCE_WIDTH = 3500;
 
-function loadGrayscale(url) {
+function getSourceWidth() {
+  if (typeof window === "undefined") return 3500;
+  return window.innerWidth < 768 ? 1400 : 3500;
+}
+
+function loadGrayscale(url, maxWidth) {
   return new Promise((resolve, reject) => {
     const img = new window.Image();
     img.crossOrigin = "anonymous";
     img.onload = () => {
-      const maxWidth = SOURCE_WIDTH;
       const scale = Math.min(1, maxWidth / img.naturalWidth);
       const w = Math.max(1, Math.round(img.naturalWidth * scale));
       const h = Math.max(1, Math.round(img.naturalHeight * scale));
@@ -46,11 +49,13 @@ export default function DuotoneGallery({ images, alt, active }) {
     let cancelled = false;
     async function prepareAll() {
       if (!images || images.length === 0) return;
+      const sourceWidth = getSourceWidth();
       const results = await Promise.all(
         images.map(async (item) => {
           try {
             const { gray, w, h } = await loadGrayscale(
-              urlFor(item.image).width(SOURCE_WIDTH).quality(85).url()
+              urlFor(item.image).width(sourceWidth).quality(80).url(),
+              sourceWidth
             );
             return { gray, w, h, color: item.color || "#000000" };
           } catch (e) {
