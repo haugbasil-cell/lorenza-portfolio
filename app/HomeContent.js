@@ -18,7 +18,7 @@ export default function HomeContent({
   galleries,
 }) {
   const [hovering, setHovering] = useState(false);
-  const activeColor = hovering ? "#3f3f3f" : backgroundColor;
+ const activeColor = backgroundColor;
 
   return (
     <main className={styles.page} style={{ backgroundColor: activeColor }}>
