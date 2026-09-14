@@ -4,6 +4,8 @@ import { client } from "@/sanity/lib/client";
 import { layoutQuery } from "@/sanity/lib/queries";
 import TabTitleSwitcher from "./TabTitleSwitcher";
 
+export const revalidate = 30;
+
 const unFont = localFont({
   src: [
     {
