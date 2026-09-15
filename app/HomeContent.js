@@ -63,32 +63,33 @@ export default function HomeContent({
         />
       )}
 
-      <div
-        className={styles.textBlock}
-        style={{ opacity: isActive ? 0 : 1, transition: "opacity 0.3s ease" }}
-      >
+      <div className={styles.textBlock}>
         <p>{name}</p>
-        <p>
-          Portfolio:{' '}
-          {years.map((y, i) => (
-            <span key={i}>
-              <a 
-                href={y.pdfUrl || '#'}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={y.highlighted ? styles.highlighted : undefined}
-              >
-                {y.label}
-              </a>
-              {i < years.length - 1 ? ', ' : ''}
-            </span>
-          ))}
-        </p>
-        <p>
-          Contact:{' '}
-          <a href={`mailto:${email}`}>{email}</a>
-        </p>
-        <p>© {copyrightYear} All Rights Reserved</p>
+        <div
+          style={{ opacity: isActive ? 0 : 1, transition: "opacity 0.3s ease" }}
+        >
+          <p>
+            Portfolio:{' '}
+            {years.map((y, i) => (
+              <span key={i}>
+                <a 
+                  href={y.pdfUrl || '#'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={y.highlighted ? styles.highlighted : undefined}
+                >
+                  {y.label}
+                </a>
+                {i < years.length - 1 ? ', ' : ''}
+              </span>
+            ))}
+          </p>
+          <p>
+            Contact:{' '}
+            <a href={`mailto:${email}`}>{email}</a>
+          </p>
+          <p>© {copyrightYear} All Rights Reserved</p>
+        </div>
       </div>
 
       {showDuotoneGallery && (

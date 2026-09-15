@@ -86,12 +86,3 @@
     font-size: 12px;
   }
 }
-
-@media (max-width: 600px) {
-  .duotoneWrap {
-    top: 80px;
-    left: 20px;
-    right: 20px;
-    bottom: 80px;
-  }
-}
