@@ -5,6 +5,8 @@ import RandomImage from "./RandomImage";
 import DuotoneGallery from "./DuotoneGallery";
 import styles from "./page.module.css";
 
+const IDLE_DELAY = 5000;
+
 export default function HomeContent({
   name,
   email,
@@ -18,7 +20,35 @@ export default function HomeContent({
   galleries,
 }) {
   const [hovering, setHovering] = useState(false);
+  const [idleActive, setIdleActive] = useState(false);
   const activeColor = backgroundColor;
+  const isActive = hovering || idleActive;
+
+  useEffect(() => {
+    let idleTimer;
+
+    function startTimer() {
+      idleTimer = setTimeout(() => {
+        setIdleActive(true);
+      }, IDLE_DELAY);
+    }
+
+    function handleActivity() {
+      setIdleActive(false);
+      clearTimeout(idleTimer);
+      startTimer();
+    }
+
+    const events = ["mousemove", "mousedown", "touchstart", "keydown", "scroll"];
+    events.forEach((event) => window.addEventListener(event, handleActivity));
+
+    startTimer();
+
+    return () => {
+      clearTimeout(idleTimer);
+      events.forEach((event) => window.removeEventListener(event, handleActivity));
+    };
+  }, []);
 
   return (
     <main className={styles.page} style={{ backgroundColor: activeColor }}>
@@ -26,7 +56,7 @@ export default function HomeContent({
         <RandomImage
           images={images}
           alt={name}
-          hidden={hovering}
+          hidden={isActive}
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={() => setHovering(false)}
           onClick={() => setHovering((h) => !h)}
@@ -35,7 +65,7 @@ export default function HomeContent({
 
       <div
         className={styles.textBlock}
-        style={{ opacity: hovering ? 0 : 1, transition: "opacity 0.3s ease" }}
+        style={{ opacity: isActive ? 0 : 1, transition: "opacity 0.3s ease" }}
       >
         <p>{name}</p>
         <p>
@@ -79,7 +109,7 @@ export default function HomeContent({
       </div>
 
       {showDuotoneGallery && (
-        <DuotoneGallery images={duotoneImages} alt={name} active={hovering} />
+        <DuotoneGallery images={duotoneImages} alt={name} active={isActive} />
       )}
     </main>
   );
