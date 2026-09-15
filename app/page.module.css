@@ -8,10 +8,10 @@
 
 .imageWrap {
   position: absolute;
-  top: 30px;
-  left: 30px;
-  max-width: 250px;
-  max-height: 60dvh;
+  top: 50px;
+  left: 50px;
+  max-width: 300px;
+  max-height: 70dvh;
 }
 
 .image {
@@ -38,11 +38,11 @@
 
 .textBlock {
   position: absolute;
-  bottom: 30px;
-  left: 30px;
+  bottom: 50px;
+  left: 50px;
   color: #020202;
   font-family: var(--font-mono, monospace);
-  font-size: 18px;
+  font-size: 20px;
   line-height: 1.5;
   font-weight: 700;
   text-transform: none;
@@ -83,6 +83,6 @@
 
 @media (max-width: 600px) {
   .textBlock {
-    font-size: 12px;
+    font-size: 16px;
   }
 }
