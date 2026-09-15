@@ -44,8 +44,8 @@ export async function generateMetadata() {
   }
 
   return {
-    title: "Lorenza Longhi — Portfolio",
-    description: "Portfolio von Lorenza Longhi",
+   title: "Lorenza Longhi",
+    description: "Artist Lorenza Longhi, b. 1991, Lecco, Italy; lives and works in Zurich",
     icons: faviconUrl ? { icon: faviconUrl } : undefined,
     themeColor: backgroundColor,
   };
