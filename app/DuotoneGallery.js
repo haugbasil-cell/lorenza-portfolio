@@ -5,8 +5,8 @@ import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
 const REVEAL_DURATION = 3750;
-const HOLD_DURATION_FULL = 750;
-const HOLD_DURATION_EMPTY = 750;
+const HOLD_DURATION_FULL = 1500;
+const HOLD_DURATION_EMPTY = 1500;
 const THRESHOLD_TARGET = 255;
 
 function getSourceWidth() {
