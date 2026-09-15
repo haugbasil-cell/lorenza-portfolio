@@ -1,99 +1,189 @@
-"use client";
+import { defineField, defineType } from 'sanity'
 
-import { useEffect, useState } from "react";
-import RandomImage from "./RandomImage";
-import DuotoneGallery from "./DuotoneGallery";
-import styles from "./page.module.css";
-
-const IDLE_DELAY = 5000;
-
-export default function HomeContent({
-  name,
-  email,
-  copyrightYear,
-  images,
-  showMainImage,
-  duotoneImages,
-  showDuotoneGallery,
-  backgroundColor,
-  years,
-  galleries,
-}) {
-  const [hovering, setHovering] = useState(false);
-  const [idleActive, setIdleActive] = useState(false);
-  const activeColor = backgroundColor;
-  const isActive = hovering || idleActive;
-
-  useEffect(() => {
-    let idleTimer;
-
-    function startTimer() {
-      idleTimer = setTimeout(() => {
-        setIdleActive(true);
-      }, IDLE_DELAY);
-    }
-
-    function handleActivity() {
-      setIdleActive(false);
-      clearTimeout(idleTimer);
-      startTimer();
-    }
-
-    const events = ["mousemove", "mousedown", "touchstart", "keydown", "scroll"];
-    events.forEach((event) => window.addEventListener(event, handleActivity));
-
-    startTimer();
-
-    return () => {
-      clearTimeout(idleTimer);
-      events.forEach((event) => window.removeEventListener(event, handleActivity));
-    };
-  }, []);
-
-  return (
-    <main className={styles.page} style={{ backgroundColor: activeColor }}>
-      {showMainImage && (
-        <RandomImage
-          images={images}
-          alt={name}
-          hidden={isActive}
-          onMouseEnter={() => setHovering(true)}
-          onMouseLeave={() => setHovering(false)}
-          onClick={() => setHovering((h) => !h)}
-        />
-      )}
-
-      <div
-        className={styles.textBlock}
-        style={{ opacity: isActive ? 0 : 1, transition: "opacity 0.3s ease" }}
-      >
-        <p>{name}</p>
-        <p>
-          Portfolio:{' '}
-          {years.map((y, i) => (
-            <span key={i}>
-              <a 
-                href={y.pdfUrl || '#'}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={y.highlighted ? styles.highlighted : undefined}
-              >
-                {y.label}
-              </a>
-              {i < years.length - 1 ? ', ' : ''}
-            </span>
-          ))}
-        </p>
-        <p>
-          Contact:{' '}
-          <a href={`mailto:${email}`}>{email}</a>
-        </p>
-        <p>© {copyrightYear} All Rights Reserved</p>
-      </div>
-
-      {showDuotoneGallery && (
-        <DuotoneGallery images={duotoneImages} alt={name} active={isActive} />
-      )}
-    </main>
-  );
-}
+export default defineType({
+  name: 'homepage',
+  title: 'Startseite',
+  type: 'document',
+  fields: [
+    defineField({
+      name: 'title',
+      title: 'Interner Titel (nur zur Orientierung im Studio)',
+      type: 'string',
+      initialValue: 'Startseite',
+    }),
+       defineField({
+      name: 'favicon',
+      title: 'Favicon (Browser-Tab-Icon)',
+      type: 'image',
+      description: 'Kleines quadratisches Bild, das im Browser-Tab neben dem Seitentitel angezeigt wird (z. B. 512×512px, PNG).',
+    }),
+    defineField({
+      name: 'showMainImage',
+      title: 'Bildergalerie oben links anzeigen',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'images',
+      title: 'Bilder (oben links, zufällige Auswahl)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'galleryImage',
+          title: 'Bild',
+          fields: [
+            defineField({
+              name: 'image',
+              title: 'Bilddatei',
+              type: 'image',
+              options: { hotspot: true },
+            }),
+            defineField({
+              name: 'fullBleed',
+              title: 'Randlos (Fullbleed)',
+              type: 'boolean',
+              description:
+                'An: Bild füllt die linke Spalte randlos von oben bis unten. Aus: Bild erscheint klein, mit Abstand zum Rand.',
+              initialValue: false,
+            }),
+          ],
+          preview: { select: { media: 'image', fullBleed: 'fullBleed' } },
+        },
+      ],
+      description:
+        'Lade hier mehrere Bilder hoch. Bei jedem Laden der Seite wird zufällig eines davon angezeigt.',
+    }),
+    defineField({
+      name: 'showDuotoneGallery',
+      title: 'Zweifarben-Galerie anzeigen',
+      type: 'boolean',
+      initialValue: true,
+    }),
+    defineField({
+      name: 'duotoneImages',
+      title: 'Zweifarben-Bildergalerie (zentriert, wechselt automatisch)',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          name: 'duotoneImage',
+          title: 'Bild',
+          fields: [
+            defineField({
+              name: 'image',
+              title: 'Bilddatei',
+              type: 'image',
+              options: { hotspot: true },
+            }),
+            defineField({
+              name: 'color',
+              title: 'Akzentfarbe',
+              type: 'color',
+              description: 'Diese Farbe ersetzt die dunklen Bereiche des Bilds im Zweifarben-Effekt.',
+            }),
+            defineField({
+              name: 'rotateFrame',
+              title: 'Rahmen drehen (für Hochformat-Bilder)',
+              type: 'boolean',
+              description: 'An: Rahmen wird quer statt hoch angezeigt, passend für Hochformat-Bilder.',
+              initialValue: false,
+            }),
+          ],
+          preview: { select: { media: 'image' } },
+        },
+      ],
+      description:
+        'Bilder für die Galerie über dem Textblock. Jedes Bild wird automatisch in ein Zweifarben-Muster umgewandelt und wechselt alle paar Sekunden.',
+    }),
+    defineField({
+      name: 'backgroundColor',
+      title: 'Hintergrundfarbe',
+      type: 'color',
+      description: 'Farbe für den gesamten Seitenhintergrund.',
+    }),
+    defineField({
+      name: 'name',
+      title: 'Name',
+      type: 'string',
+      initialValue: 'Lorenza Longhi',
+    }),
+    defineField({
+      name: 'email',
+      title: 'E-Mail',
+      type: 'string',
+    }),
+    defineField({
+      name: 'instagram',
+      title: 'Instagram-Handle',
+      type: 'string',
+      description: 'z. B. @lorenzzzzzzzza (ohne Link, nur der Name)',
+    }),
+    defineField({
+      name: 'copyrightYear',
+      title: 'Copyright-Jahr',
+      type: 'string',
+      initialValue: '2026',
+    }),
+    defineField({
+      name: 'years',
+      title: 'Portfolio-Jahre',
+      description:
+        'Eine Zeile pro Jahr. Jedes Jahr kann ein eigenes PDF haben, das beim Klick geöffnet wird.',
+      type: 'array',
+      of: [
+        defineField({
+          name: 'yearEntry',
+          title: 'Jahr',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'label',
+              title: 'Beschriftung',
+              type: 'string',
+              description: 'z. B. "2025" oder "2017–2018"',
+            }),
+            defineField({
+              name: 'highlighted',
+              title: 'Aktuell / hervorgehoben?',
+              type: 'boolean',
+              description: 'Zeigt dieses Jahr farblich hervorgehoben an (z. B. das neueste).',
+              initialValue: false,
+            }),
+            defineField({
+              name: 'pdf',
+              title: 'PDF-Datei',
+              type: 'file',
+              options: { accept: '.pdf' },
+            }),
+          ],
+          preview: {
+            select: { title: 'label' },
+          },
+        }),
+      ],
+    }),
+    defineField({
+      name: 'galleries',
+      title: 'Galerien (Represented by)',
+      description:
+        'Galerien, die Lorenza vertreten. Erscheinen als eigene Zeile mit Links zu den jeweiligen Webseiten.',
+      type: 'array',
+      of: [
+        defineField({
+          name: 'galleryEntry',
+          title: 'Galerie',
+          type: 'object',
+          fields: [
+            defineField({ name: 'name', title: 'Name', type: 'string' }),
+            defineField({ name: 'url', title: 'Website', type: 'url' }),
+          ],
+          preview: { select: { title: 'name', subtitle: 'url' } },
+        }),
+      ],
+    }),
+  ],
+  preview: {
+    select: { title: 'title' },
+  },
+})
