@@ -88,23 +88,6 @@ export default function HomeContent({
           Contact:{' '}
           <a href={`mailto:${email}`}>{email}</a>
         </p>
-        {galleries.length > 0 && (
-          <p>
-            Represented by:{' '}
-            {galleries.map((g, i) => (
-              <span key={i}>
-                {g.url ? (
-                  <a href={g.url} target="_blank" rel="noopener noreferrer">
-                    {g.name}
-                  </a>
-                ) : (
-                  g.name
-                )}
-                {i < galleries.length - 1 ? ', ' : ''}
-              </span>
-            ))}
-          </p>
-        )}
         <p>© {copyrightYear} All Rights Reserved</p>
       </div>
 
