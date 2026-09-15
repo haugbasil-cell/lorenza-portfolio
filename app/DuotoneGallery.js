@@ -4,14 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
-const REVEAL_DURATION = 3000;
-const HOLD_DURATION_FULL = 1500;
-const HOLD_DURATION_EMPTY = 1500;
+const REVEAL_DURATION = 3750;
+const HOLD_DURATION_FULL = 750;
+const HOLD_DURATION_EMPTY = 750;
 const THRESHOLD_TARGET = 255;
 
 function getSourceWidth() {
-  if (typeof window === "undefined") return 3500;
-  return window.innerWidth < 768 ? 1400 : 3500;
+  if (typeof window === "undefined") return 4000;
+  return window.innerWidth < 768 ? 1400 : 4000;
 }
 
 function loadGrayscale(url, maxWidth) {
