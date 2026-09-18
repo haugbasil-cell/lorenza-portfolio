@@ -73,7 +73,7 @@ export default function HomeContent({
             {years.map((y, i) => (
               <span key={i}>
                 <a 
-                  href={y.pdfUrl || '#'}
+                  href={y.fileName ? `/files/${y.fileName}` : (y.pdfUrl || '#')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={y.highlighted ? styles.highlighted : undefined}

@@ -22,7 +22,8 @@ duotoneImages[]{
     years[]{
       label,
       highlighted,
-      "pdfUrl": pdf.asset->url
+      "pdfUrl": pdf.asset->url,
+      "fileName": pdf.asset->originalFilename
     },
     galleries[]{
       name,
