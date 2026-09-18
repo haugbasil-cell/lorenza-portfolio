@@ -69,7 +69,7 @@ export default function HomeContent({
           style={{ opacity: isActive ? 0 : 1, transition: "opacity 0.3s ease" }}
         >
           <p>
-            Works:{' '}
+            Archive:{' '}
             {years.map((y, i) => (
               <span key={i}>
                 <a 
