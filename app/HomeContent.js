@@ -69,7 +69,6 @@ export default function HomeContent({
           style={{ opacity: isActive ? 0 : 1, transition: "opacity 0.3s ease" }}
         >
           <p>
-            Archive:{' '}
             {years.map((y, i) => (
               <span key={i}>
                 <a 
@@ -85,7 +84,7 @@ export default function HomeContent({
             ))}
           </p>
           <p>
-            Contact:{' '}
+            Contact me:{' '}
             <a href={`mailto:${email}`}>{email}</a>
           </p>
           <p>© {copyrightYear} All Rights Reserved</p>
