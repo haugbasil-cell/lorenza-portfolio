@@ -68,21 +68,23 @@ export default function HomeContent({
         <div
           style={{ opacity: isActive ? 0 : 1, transition: "opacity 0.3s ease" }}
         >
-          <p>
-            {years.map((y, i) => (
-              <span key={i}>
-                <a 
-                  href={y.fileName ? `/files/${y.fileName}` : (y.pdfUrl || '#')}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={y.highlighted ? styles.highlighted : undefined}
-                >
-                  {y.label}
-                </a>
-                {i < years.length - 1 ? ', ' : ''}
-              </span>
-            ))}
-          </p>
+          {years.length > 0 && (
+            <p>
+              {years.map((y, i) => (
+                <span key={i}>
+                  <a 
+                    href={y.fileName ? `/files/${y.fileName}` : (y.pdfUrl || '#')}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={y.highlighted ? styles.highlighted : undefined}
+                  >
+                    {y.label}
+                  </a>
+                  {i < years.length - 1 ? ', ' : ''}
+                </span>
+              ))}
+            </p>
+          )}
           <p>
             Contact me:{' '}
             <a href={`mailto:${email}`}>{email}</a>
