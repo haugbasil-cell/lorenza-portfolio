@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { urlFor } from "@/sanity/lib/image";
 import styles from "./page.module.css";
 
-const REVEAL_DURATION = 2500;
+const REVEAL_DURATION = 4000;
 const HOLD_DURATION_FULL = 500;
 const HOLD_DURATION_EMPTY = 500;
 const THRESHOLD_TARGET = 255;
