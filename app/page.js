@@ -35,7 +35,7 @@ export default async function Home() {
       duotoneImages={duotoneImages}
       showDuotoneGallery={showDuotoneGallery}
       backgroundColor={backgroundColor}
-      years={years}
+      years={years || []}
       galleries={galleries || []}
     />
   )
