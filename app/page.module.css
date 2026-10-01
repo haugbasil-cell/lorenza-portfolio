@@ -10,15 +10,15 @@
   position: absolute;
   top: 30px;
   left: 30px;
-  max-width: 300px;
-  max-height: 70dvh;
+  max-width: 270px;
+  max-height: 65dvh;
 }
 
 .image {
   width: auto;
   height: auto;
   max-width: 100%;
-  max-height: 70dvh;
+  max-height: 65dvh;
   display: block;
 }
 
