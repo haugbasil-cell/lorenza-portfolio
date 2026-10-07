@@ -3,6 +3,7 @@ import "./globals.css";
 import { client } from "@/sanity/lib/client";
 import { layoutQuery } from "@/sanity/lib/queries";
 import TabTitleSwitcher from "./TabTitleSwitcher";
+import { Analytics } from "@vercel/analytics/next";
 
 export const revalidate = 30;
 
@@ -62,10 +63,11 @@ export default async function RootLayout({ children }) {
 
   return (
     <html lang="de" className={unFont.variable} style={{ backgroundColor }}>
-      <body style={{ backgroundColor }}>
-        <TabTitleSwitcher />
-        {children}
-      </body>
+     <body style={{ backgroundColor }}>
+  <TabTitleSwitcher />
+  {children}
+  <Analytics />
+</body>
     </html>
   );
 }
