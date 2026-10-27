@@ -21,6 +21,7 @@ export default async function Home() {
     duotoneImages = [],
     showDuotoneGallery = true,
     backgroundColor = '#3D0F35',
+    textColor,
     years = [],
     galleries,
   } = data || {}
@@ -35,6 +36,7 @@ export default async function Home() {
       duotoneImages={duotoneImages}
       showDuotoneGallery={showDuotoneGallery}
       backgroundColor={backgroundColor}
+      textColor={textColor || '#000000'}
       years={years || []}
       galleries={galleries || []}
     />

@@ -96,11 +96,17 @@ export default defineType({
       description:
         'Bilder für die Galerie über dem Textblock. Jedes Bild wird automatisch in ein Zweifarben-Muster umgewandelt und wechselt alle paar Sekunden.',
     }),
-    defineField({
+       defineField({
       name: 'backgroundColor',
       title: 'Hintergrundfarbe',
       type: 'color',
       description: 'Farbe für den gesamten Seitenhintergrund.',
+    }),
+    defineField({
+      name: 'textColor',
+      title: 'Schriftfarbe',
+      type: 'color',
+      description: 'Farbe für Name, Jahre, E-Mail und Copyright unten links.',
     }),
     defineField({
       name: 'name',

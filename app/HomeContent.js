@@ -16,6 +16,7 @@ export default function HomeContent({
   duotoneImages,
   showDuotoneGallery,
   backgroundColor,
+  textColor,
   years,
   galleries,
 }) {
@@ -63,7 +64,7 @@ export default function HomeContent({
         />
       )}
 
-      <div className={styles.textBlock}>
+      <div className={styles.textBlock} style={{ color: textColor }}>
         <p>{name}</p>
         <div
           style={{ opacity: isActive ? 0 : 1, transition: "opacity 0.3s ease" }}

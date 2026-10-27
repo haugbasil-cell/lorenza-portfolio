@@ -19,6 +19,7 @@ duotoneImages[]{
   rotateFrame
 },
     "backgroundColor": backgroundColor.hex,
+    "textColor": textColor.hex,
     years[]{
       label,
       highlighted,
